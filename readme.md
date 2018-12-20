@@ -1,9 +1,9 @@
 # laravel-ai
-This repository aims to create a dataset of Laravel implementations for Artificial Inteligence research and experiments. 
-![Laravelinator](images/laravel-terminator.png)
-The following tools are provided:
+<img src="images/laravel-terminator.png" height=256>
 
-* Scrape module
+This repository aims to create tools and datasets of Laravel implementations for Artificial Inteligence research. That includes:
+
+* Github scrape module
 * Pytorch Dataset
 * Pytorch Dataloader
 * Example analysis
@@ -16,4 +16,4 @@ The following tools are provided:
 * run main.py
 
 ## License
-MIT and optionally pay what you want.
+MIT and optionally [pay what you want](https://andersjurisoo.com/laravel-ai/pay-what-you-want) (Allows me to keep hosting the dataset on AWS).

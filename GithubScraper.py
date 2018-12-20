@@ -1,6 +1,8 @@
 import os
 import sys
+import base64
 from github import Github
+
 
 class GithubScraper(object):
     def __init__(
@@ -17,20 +19,31 @@ class GithubScraper(object):
             if repo_number >= self.max_repos:
                 print("Max number of repos processed")
                 break
+                
+            print("Proccessing", repo.full_name, '*******************************************')    
+
             try:
                 migrations = repo.get_dir_contents('database/migrations')
-                for migration in migrations:
-                    self.save_file(repo, migration)
-                    print('Saved a file from', repo.full_name)
             except:
-                print('There was a problem when trying to get the database/migrations folder')
+                print('Could not find database/migrations folder of', repo.full_name)
+
+            for migration in migrations:
+                try:
+                    self.save_file(repo, migration)    
+                except:
+                    print('Could not save database/migrations folder for', repo.full_name)                    
+
 
     def save_file(self, repo, file):
         root = os.path.dirname(os.path.realpath(__file__))
         filename = os.path.join(root, "scraped", repo.full_name, file.path)
 
         os.makedirs(os.path.dirname(filename), exist_ok=True)
-        with open(filename, "w") as f:
-            pass
-            f.write(repo.get_contents(file.path).content)
-            f.close() 
+        with open(filename, "wb") as f:
+            f.write(
+                    base64.b64decode(
+                            repo.get_contents(file.path).content
+                    )
+            )
+            f.close()
+            print('Saved', file.path) 

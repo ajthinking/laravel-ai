@@ -20,24 +20,24 @@ class GithubScraper(object):
                 print("Max number of repos processed")
                 break
                 
-            print("Proccessing", repo.full_name, '*******************************************')    
+            print("Proccessing", repo.full_name, '**************************************************************************************')    
 
             try:
                 migrations = repo.get_dir_contents('database/migrations')
+                for migration in migrations:
+                    try:
+                        self.save_file(repo, migration)    
+                    except:
+                        print('Could not save database/migrations folder for', repo.full_name)                    
             except:
                 print('Could not find database/migrations folder of', repo.full_name)
 
-            for migration in migrations:
-                try:
-                    self.save_file(repo, migration)    
-                except:
-                    print('Could not save database/migrations folder for', repo.full_name)                    
+
 
 
     def save_file(self, repo, file):
         root = os.path.dirname(os.path.realpath(__file__))
         filename = os.path.join(root, "scraped", repo.full_name, file.path)
-
         os.makedirs(os.path.dirname(filename), exist_ok=True)
         with open(filename, "wb") as f:
             f.write(

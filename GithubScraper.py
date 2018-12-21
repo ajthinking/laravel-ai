@@ -2,7 +2,10 @@ import os
 import sys
 import base64
 from github import Github
+from Print import Print
+from Env import env
 
+print = Print() # add glorious indentation and colors to print
 
 class GithubScraper(object):
     def __init__(
@@ -11,26 +14,28 @@ class GithubScraper(object):
                     overwrite_repos = True,
                 ):
         self.max_repos = max_repos
-        self.github = Github("2dcce1db26a94b4b4ff884e82fe902cf2e9a834a")
+        self.github = Github(env.GITHUB_ACCESS_TOKEN)
 
     def scrape(self):
-        print("Initializing scrape")
+        print.info("Initializing scrape")
         for repo_number, repo in enumerate(self.github.search_repositories(query="Laravel", sort="stars")):
+            print.reset()
             if repo_number >= self.max_repos:
-                print("Max number of repos processed")
+                print.warning("Max number of repos processed, bye bye")
                 break
-                
-            print("Proccessing repo number", repo_number, repo.full_name, '**************************************************************************************')    
-            
+
+
+            print.info(str(repo_number) + " " + repo.full_name + '**************************************************************************************')    
+            print.group()
+
             root = os.path.dirname(os.path.realpath(__file__))
             repo_folder = os.path.join(root, "scraped", repo.full_name)
             
             if os.path.isdir(repo_folder):
-                print('Skipping already harvested repo', repo.full_name)
+                print.warning('Skipping already harvested repo ' + repo.full_name)
                 continue
 
-
-            os.makedirs(os.path.dirname(repo_folder), exist_ok=True)
+            os.makedirs(repo_folder, exist_ok=True)
 
             try:
                 migrations = repo.get_dir_contents('database/migrations')
@@ -38,10 +43,11 @@ class GithubScraper(object):
                     try:
                         self.save_file(repo, migration)    
                     except:
-                        print('Could not save database/migrations folder for', repo.full_name)                    
+                        print.fail('Could not save database/migrations folder for ' + repo.full_name)                    
             except:
-                print('Could not find database/migrations folder of', repo.full_name)
-
+                print.fail('Could not find database/migrations folder of ' + repo.full_name)
+        
+        print.info("Done! Next, utilize a trick to get all results, not just the first 1000 or so :)")
 
 
 
@@ -56,4 +62,4 @@ class GithubScraper(object):
                     )
             )
             f.close()
-            print('Saved', file.path) 
+            print.success('Saved ' + file.path) 

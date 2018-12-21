@@ -20,7 +20,17 @@ class GithubScraper(object):
                 print("Max number of repos processed")
                 break
                 
-            print("Proccessing", repo.full_name, '**************************************************************************************')    
+            print("Proccessing repo number", repo_number, repo.full_name, '**************************************************************************************')    
+            
+            root = os.path.dirname(os.path.realpath(__file__))
+            repo_folder = os.path.join(root, "scraped", repo.full_name)
+            
+            if os.path.isdir(repo_folder):
+                print('Skipping already harvested repo', repo.full_name)
+                continue
+
+
+            os.makedirs(os.path.dirname(repo_folder), exist_ok=True)
 
             try:
                 migrations = repo.get_dir_contents('database/migrations')

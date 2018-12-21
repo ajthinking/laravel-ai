@@ -1,0 +1,1 @@
+github.GithubException.RateLimitExceededException: 403 {'message': 'API rate limit exceeded for user ID 3457668.', 'documentation_url': 'https://developer.github.com/v3/#rate-limiting'}

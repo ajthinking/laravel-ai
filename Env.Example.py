@@ -1,6 +1,5 @@
 class Env(object):
-    def __init__(self):
-        self.GITHUB_ACCESS_TOKEN = "",
-        
+    # Set your token at https://github.com/settings/tokens
+    GITHUB_ACCESS_TOKEN = "ADD-YOUR-TOKEN-HERE"
 
 env = Env() # avoid newing up object when using

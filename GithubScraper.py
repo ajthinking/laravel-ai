@@ -1,6 +1,7 @@
 import os
 import sys
 import base64
+import time
 from github import Github
 from Print import Print
 from Env import env
@@ -24,6 +25,13 @@ class GithubScraper(object):
                 print.warning("Max number of repos processed, bye bye")
                 break
 
+            if self.github.rate_limiting[0] <= 1:
+                print.warning("Going to sleep for 60 seconds due to API rate limiting:")
+                print(self.github.rate_limiting[1] - self.github.rate_limiting[0], "/",self.github.rate_limiting[1])
+                time.sleep(60)
+                # Hack! resets the rate_limit dump to the core API
+                # Then the rate will probably OK so we dont go back to sleep
+                self.github.get_rate_limit()
 
             print.info(str(repo_number) + " " + repo.full_name + '**************************************************************************************')    
             print.group()
@@ -47,7 +55,7 @@ class GithubScraper(object):
             except:
                 print.fail('Could not find database/migrations folder of ' + repo.full_name)
         
-        print.info("Done! Next, utilize a trick to get all results, not just the first 1000 or so :)")
+        print.success("Done! Next, utilize a trick to get all results, not just the first 1000 or so :)")
 
 
 

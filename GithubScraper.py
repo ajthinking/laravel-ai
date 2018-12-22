@@ -2,6 +2,8 @@ import os
 import sys
 import base64
 import time
+import datetime
+from datetime import timedelta
 from github import Github
 from Print import Print
 from Env import env
@@ -20,10 +22,15 @@ class GithubScraper(object):
         self.filters = filters
         self.github = Github(env.GITHUB_ACCESS_TOKEN)
 
+    def make_time_intervals(self):
+        start_date = datetime.datetime.strptime('24052010', r'%d%m%Y').date()
+        end_date = start_date + timedelta(days=1)
+        print(start_date, end_date)        
+        pass
 
     def scrape(self):
         print.info("Initializing scrape")
-        for repo_number, repo in enumerate(self.github.search_repositories(query="Laravel", sort="stars")):
+        for repo_number, repo in enumerate(self.github.search_repositories(query="Laravel created:2012-12-01..2012-12-02", sort="stars")):
             print.reset()
             if repo_number >= self.max_repos:
                 print.warning("Max number of repos processed, bye bye")
@@ -50,7 +57,10 @@ class GithubScraper(object):
             os.makedirs(repo_folder, exist_ok=True)
             
             for filter in self.filters:
-                item = repo.get_contents(filter)
+                try:
+                    item = repo.get_contents(filter)
+                except:
+                    continue                                           
                 if isinstance(item, list):
                     self.save_dir(repo, filter)    
                 elif item.type == "file":

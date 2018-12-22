@@ -33,14 +33,14 @@ class GithubScraper(object):
                 # Then the rate will probably OK so we dont go back to sleep
                 self.github.get_rate_limit()
 
-            print.info(str(repo_number) + " " + repo.full_name + '**************************************************************************************')    
+            print.info(repo_number, repo.full_name, '**************************************************************************************')    
             print.group()
 
             root = os.path.dirname(os.path.realpath(__file__))
             repo_folder = os.path.join(root, "scraped", repo.full_name)
             
             if os.path.isdir(repo_folder):
-                print.warning('Skipping already harvested repo ' + repo.full_name)
+                print.warning('Skipping already harvested repo', repo.full_name)
                 continue
 
             os.makedirs(repo_folder, exist_ok=True)
@@ -51,11 +51,11 @@ class GithubScraper(object):
                     try:
                         self.save_file(repo, migration)    
                     except:
-                        print.fail('Could not save database/migrations folder for ' + repo.full_name)                    
+                        print.fail('Could not save database/migrations folder for', repo.full_name)                    
             except:
-                print.fail('Could not find database/migrations folder of ' + repo.full_name)
+                print.fail('Could not find database/migrations folder of', repo.full_name)
         
-        print.success("Done! Next, utilize a trick to get all results, not just the first 1000 or so :)")
+        print.success("Done!")
 
 
 
@@ -70,4 +70,4 @@ class GithubScraper(object):
                     )
             )
             f.close()
-            print.success('Saved ' + file.path) 
+            print.success('Saved', file.path) 

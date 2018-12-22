@@ -11,46 +11,60 @@ class Print(object):
     ENDC = '\033[0m'
 
     def __init__(self):
-        self.indentation = 0
+        self.indentation_levels = 0
+        self.active_color = self.ENDC
         pass
 
     def __call__(self, message):
         return self.print(message)
 
-    def indent(self, message):
-        return " " * 4 * self.indentation + message
+    def print(self, *args):
+        if not len(args):
+            raise Exception('Please pass at least one argument')
 
-    def print(self, message):
-        print(self.indent(message))
+        # Calls the builtin print
+        print(
+                self.active_color,
+                self.indentation() + str(args[0]),
+                *args[1:],
+                self.ENDC
+        )
         return self
 
-    def warning(self, message):
-        print(self.WARNING + self.indent(message)  + self.ENDC)
+    def indentation(self):
+        return " " * 4 * self.indentation_levels
+
+    def warning(self, *args):
+        self.active_color = self.WARNING
+        self.print(*args)
         return self            
 
-    def info(self, message):
-        print(self.INFO + self.indent(message) + self.ENDC)
-        return self
+    def info(self, *args):
+        self.active_color = self.INFO
+        self.print(*args)
+        return self 
 
-    def fail(self, message):
-        print(self.FAIL + self.indent(message) + self.ENDC)
-        return self
+    def fail(self, *args):
+        self.active_color = self.FAIL
+        self.print(*args)
+        return self 
 
-    def success(self, message):
-        print(self.SUCCESS + self.indent(message) + self.ENDC)
+    def success(self, *args):
+        self.active_color = self.SUCCESS
+        self.print(*args)
         return self            
 
     def group(self):
-        self.indentation += 1
+        self.indentation_levels += 1
         return self        
 
     def ungroup(self):
-        if self.indentation > 0:
-            self.indentation += -1
+        if self.indentation_levels > 0:
+            self.indentation_levels += -1
         return self
 
     def reset(self):
-        self.indentation = 0
+        self.indentation_levels = 0
         return self
 
 
@@ -58,6 +72,5 @@ if __name__ == '__main__':
 
     # Demo of the class 
     printer = Print()
-    #printer.info("laravel/laravel").group().success("User.php").success("Password_resets.php").warning(".gitignore").fail("Could not open file X")
-    #printer.reset().info('laravel/valet')
-    printer("yeah")
+    printer.group().success("sure")
+    printer.reset().warning('extensive testing', 3, "COOL")

@@ -14,7 +14,8 @@ class Print(object):
         self.indentation = 0
         pass
 
-    __call__ = print
+    def __call__(self, message):
+        return self.print(message)
 
     def indent(self, message):
         return " " * 4 * self.indentation + message
@@ -57,5 +58,6 @@ if __name__ == '__main__':
 
     # Demo of the class 
     printer = Print()
-    printer.info("laravel/laravel").group().success("User.php").success("Password_resets.php").warning(".gitignore").fail("Could not open file X")
-    printer.reset().info('laravel/valet')
+    #printer.info("laravel/laravel").group().success("User.php").success("Password_resets.php").warning(".gitignore").fail("Could not open file X")
+    #printer.reset().info('laravel/valet')
+    printer("yeah")

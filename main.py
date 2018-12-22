@@ -1,9 +1,9 @@
 from GithubScraper import GithubScraper
 
 GithubScraper(
-        #max_repos=1,
+        max_repos=8,
         filters = [
-                #"database/migrations",
+                "database/migrations",
                 "composer.json"
         ]
 ).scrape()

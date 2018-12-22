@@ -21,12 +21,24 @@ class GithubScraper(object):
         self.max_repos = max_repos
         self.filters = filters
         self.github = Github(env.GITHUB_ACCESS_TOKEN)
+        #print(self.make_time_intervals())
 
+    # Split up the queries since max results per query is 1000
     def make_time_intervals(self):
-        start_date = datetime.datetime.strptime('24052010', r'%d%m%Y').date()
-        end_date = start_date + timedelta(days=1)
-        print(start_date, end_date)        
-        pass
+        start_date = datetime.datetime.strptime('20181121', r'%Y%m%d').date()
+        intervals = []
+
+        # emulate do-while
+        while True:
+            end_date = start_date + timedelta(days=1)
+            intervals.append((start_date, end_date))
+            start_date = end_date
+            if end_date > datetime.datetime.now().date():
+                break
+
+        return intervals
+        
+
 
     def scrape(self):
         print.info("Initializing scrape")

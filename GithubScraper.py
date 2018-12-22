@@ -14,9 +14,12 @@ class GithubScraper(object):
                     self,
                     max_repos = float('inf'),
                     overwrite_repos = True,
+                    filters = []
                 ):
         self.max_repos = max_repos
+        self.filters = filters
         self.github = Github(env.GITHUB_ACCESS_TOKEN)
+
 
     def scrape(self):
         print.info("Initializing scrape")
@@ -45,13 +48,19 @@ class GithubScraper(object):
                 continue
 
             os.makedirs(repo_folder, exist_ok=True)
-
-            self.save_dir(repo, 'database')
+            
+            for filter in self.filters:
+                item = repo.get_contents(filter)
+                if isinstance(item, list):
+                    self.save_dir(repo, filter)    
+                elif item.type == "file":
+                    self.save_file(repo, filter) 
+                else:
+                    raise Exception('Unexpected item type (only support dir/file')                                           
         
         print.success("Done!")
 
     def save_dir(self, repo, dir):
-        print("save_dir", dir)
         try:
             dir_content = repo.get_dir_contents(dir)
 
@@ -69,7 +78,6 @@ class GithubScraper(object):
             print.fail('Could not find specified folder of', repo.full_name)
 
     def save_file(self, repo, file):
-        print("save_file", file)
         root = os.path.dirname(os.path.realpath(__file__))
         filename = os.path.join(root, "scraped", repo.full_name, file)
         os.makedirs(os.path.dirname(filename), exist_ok=True)

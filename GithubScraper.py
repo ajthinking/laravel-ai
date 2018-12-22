@@ -6,6 +6,7 @@ from github import Github
 from Print import Print
 from Env import env
 
+original_print = print
 print = Print() # add glorious indentation and colors to print
 
 class GithubScraper(object):
@@ -45,29 +46,38 @@ class GithubScraper(object):
 
             os.makedirs(repo_folder, exist_ok=True)
 
-            try:
-                migrations = repo.get_dir_contents('database/migrations')
-                for migration in migrations:
-                    try:
-                        self.save_file(repo, migration)    
-                    except:
-                        print.fail('Could not save database/migrations folder for', repo.full_name)                    
-            except:
-                print.fail('Could not find database/migrations folder of', repo.full_name)
+            self.save_dir(repo, 'database')
         
         print.success("Done!")
 
+    def save_dir(self, repo, dir):
+        print("save_dir", dir)
+        try:
+            dir_content = repo.get_dir_contents(dir)
 
+            for item in dir_content:
+                try:
+                    if item.type == "dir":
+                        self.save_dir(repo, item.path)    
+                    elif item.type == "file":
+                        self.save_file(repo, item.path) 
+                    else:
+                        raise Exception('Unexpected item type (only support dir/file')                               
+                except:
+                    print.fail('Could not save', item.type, "from", repo.full_name)                    
+        except:
+            print.fail('Could not find specified folder of', repo.full_name)
 
     def save_file(self, repo, file):
+        print("save_file", file)
         root = os.path.dirname(os.path.realpath(__file__))
-        filename = os.path.join(root, "scraped", repo.full_name, file.path)
+        filename = os.path.join(root, "scraped", repo.full_name, file)
         os.makedirs(os.path.dirname(filename), exist_ok=True)
         with open(filename, "wb") as f:
             f.write(
                     base64.b64decode(
-                            repo.get_contents(file.path).content
+                            repo.get_contents(file).content
                     )
             )
             f.close()
-            print.success('Saved', file.path) 
+            print.success('Saved', file) 

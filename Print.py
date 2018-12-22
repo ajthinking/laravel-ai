@@ -15,8 +15,8 @@ class Print(object):
         self.active_color = self.ENDC
         pass
 
-    def __call__(self, message):
-        return self.print(message)
+    def __call__(self, *args):
+        return self.print(*args)
 
     def print(self, *args):
         if not len(args):

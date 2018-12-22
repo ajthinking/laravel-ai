@@ -1,5 +1,5 @@
 from GithubScraper import GithubScraper
 
 GithubScraper(
-        max_repos=8
+        max_repos=1
 ).scrape()

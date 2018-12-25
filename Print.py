@@ -67,7 +67,6 @@ class Print(object):
         self.indentation_levels = 0
         return self
 
-
 if __name__ == '__main__':
 
     # Demo of the class 

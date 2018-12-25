@@ -1,4 +1,5 @@
 /scraped/
+/backup/
 *.pyc
 /Env.py
 /.vscode

@@ -3,6 +3,7 @@ import sys
 import base64
 import time
 import datetime
+import re
 from datetime import timedelta
 from github import Github
 from Print import Print
@@ -16,8 +17,9 @@ class Transformer(object):
 
     def regex_for(self, type):
         expressions = {
-            "table": r'Schema::create\(',
-            "data_type": r'\$table->',
+            "table": r"(?:Schema::create\(')(.*)(?:')",
+            "column_data_type": r"(?:\$table->)([a-z_A-Z]*)",
+            "column_name": r"(?:\$table->.*')(.*)(?:')",
         }
 
         return expressions[type]
@@ -30,7 +32,37 @@ class Transformer(object):
             )
         raise Exception('No such method')
 
+    def table(self):
+        return re.findall(
+                self.regex_for_table,
+                self.file_contents(
+                    '/Users/anders/Code/github-scrape-laravel/scraped/EmpeRoar/application/database/migrations/2014_10_12_000000_create_users_table.php'
+                )
+        )[0]
+
+    def columns(self):
+        return re.findall(
+                self.regex_for_column_data_type,
+                self.file_contents(
+                    '/Users/anders/Code/github-scrape-laravel/scraped/EmpeRoar/application/database/migrations/2014_10_12_000000_create_users_table.php'
+                )
+        )        
+
+    def names(self):
+        return re.findall(
+                self.regex_for_column_name,
+                self.file_contents(
+                    '/Users/anders/Code/github-scrape-laravel/scraped/EmpeRoar/application/database/migrations/2014_10_12_000000_create_users_table.php'
+                )
+        )
+
+    def file_contents(self, path):
+        with open(path, 'r') as file:
+            return file.read()
+
 if __name__ == '__main__':
     # Demo of the class 
     t = Transformer()
-    print(t.regex_for_table)
+    print(t.table())
+    print(t.columns())
+    print(t.names())

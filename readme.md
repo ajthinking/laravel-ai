@@ -13,7 +13,7 @@ This repository supplies tools to analyze the Laravel community's implementation
 * install pygithub
 * install pytorch
 * copy Env.Example.py to Env.py and set your GITHUB_ACCESS_TOKEN
-* run main.py
+* run ```python src/examples/migration-analysis/01_scrape.py```
 
 ## Todo
 - [x] Make a Env class

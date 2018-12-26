@@ -22,6 +22,7 @@ This repository supplies tools to analyze the Laravel community's implementation
 - [x] Move everything to a src folder
 - [x] Rename 'scraped' to 'data/raw'
 - [x] Code example Transformer-X
+- [ ] Deploy more scrapers
 - [ ] Transform 'data/raw' into 'data/processed/transformer-x'
 - [ ] Find online storage for harvested dumps (33K files -> 83,8 MB )
 

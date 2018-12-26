@@ -4,3 +4,9 @@
 /Env.py
 /.vscode
 /__pycache__/
+
+# exclude everything
+data/*
+
+# exception to the rule
+!data/.gitkeep 

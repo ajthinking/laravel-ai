@@ -4,15 +4,19 @@ import base64
 import time
 import datetime
 import re
+import inspect
 from datetime import timedelta
 from github import Github
 
-sys.path.append("/Users/anders/Code/github-scrape-laravel/src")
+# Add parent src hack 
+sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), "../../"))
+
 from Print import Print #pylint: disable=E0401
 from Env import env #pylint: disable=E0401
 
 
 print = Print() # add glorious indentation and colors to print
+
 
 class Transformer(object):
     def __init__(self):
@@ -39,7 +43,7 @@ class Transformer(object):
         return re.findall(
                 self.regex_for_table,
                 self.file_contents(
-                    '/Users/anders/Code/github-scrape-laravel/scraped/EmpeRoar/application/database/migrations/2014_10_12_000000_create_users_table.php'
+                    '/Users/anders/Code/github-scrape-laravel/data/raw/EmpeRoar/application/database/migrations/2014_10_12_000000_create_users_table.php'
                 )
         )[0]
 
@@ -47,7 +51,7 @@ class Transformer(object):
         return re.findall(
                 self.regex_for_column_data_type,
                 self.file_contents(
-                    '/Users/anders/Code/github-scrape-laravel/scraped/EmpeRoar/application/database/migrations/2014_10_12_000000_create_users_table.php'
+                    '/Users/anders/Code/github-scrape-laravel/data/raw/EmpeRoar/application/database/migrations/2014_10_12_000000_create_users_table.php'
                 )
         )        
 
@@ -55,7 +59,7 @@ class Transformer(object):
         return re.findall(
                 self.regex_for_column_name,
                 self.file_contents(
-                    '/Users/anders/Code/github-scrape-laravel/scraped/EmpeRoar/application/database/migrations/2014_10_12_000000_create_users_table.php'
+                    '/Users/anders/Code/github-scrape-laravel/data/raw/EmpeRoar/application/database/migrations/2014_10_12_000000_create_users_table.php'
                 )
         )
 

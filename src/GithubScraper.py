@@ -54,7 +54,7 @@ class GithubScraper(object):
             print.group()
 
             root = os.path.dirname(os.path.realpath(__file__))
-            repo_folder = os.path.join(root, "scraped", repo.full_name)
+            repo_folder = os.path.join(root, "data/raw", repo.full_name)
             
             if os.path.isdir(repo_folder):
                 print.warning('Skipping already harvested repo', repo.full_name)
@@ -111,7 +111,7 @@ class GithubScraper(object):
     def save_file(self, repo, file):
         try:
             root = os.path.dirname(os.path.realpath(__file__))
-            filename = os.path.join(root, "scraped", repo.full_name, file)
+            filename = os.path.join(root, "data/raw", repo.full_name, file)
             os.makedirs(os.path.dirname(filename), exist_ok=True)
             with open(filename, "wb") as f:
                 f.write(

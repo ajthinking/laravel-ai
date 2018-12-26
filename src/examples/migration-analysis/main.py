@@ -1,8 +1,13 @@
 import datetime
+import sys
+import os
 
-#
+# Add parent src hack 
+sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), "../../"))
 
-from GithubScraper import GithubScraper
+from Print import Print #pylint: disable=E0401
+from Env import env #pylint: disable=E0401
+from GithubScraper import GithubScraper #pylint: disable=E0401
 
 GithubScraper(
         #max_repos=1,

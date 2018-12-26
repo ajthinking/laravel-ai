@@ -23,7 +23,7 @@ This repository supplies tools to analyze the Laravel community's implementation
 - [ ] Rename 'scraped' to 'data/raw'
 - [ ] Code example Transformer-X
 - [ ] Transform 'data/raw' into 'data/processed/transformer-x'
-- [ ] Find online storage for harvested dumps
+- [ ] Find online storage for harvested dumps (33K files -> 83,8 MB )
 
 ## License
 MIT and optionally [pay what you want](https://andersjurisoo.com/laravel-ai/pay-what-you-want) (Allows me to keep hosting the dataset on AWS).

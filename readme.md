@@ -19,9 +19,9 @@ This repository supplies tools to analyze the Laravel community's implementation
 - [x] Make a Env class
 - [x] Make a Print class
 - [x] Make 'main' into 'analysis-x'
-- [ ] Move everything to a src folder
-- [ ] Rename 'scraped' to 'data/raw'
-- [ ] Code example Transformer-X
+- [x] Move everything to a src folder
+- [x] Rename 'scraped' to 'data/raw'
+- [x] Code example Transformer-X
 - [ ] Transform 'data/raw' into 'data/processed/transformer-x'
 - [ ] Find online storage for harvested dumps (33K files -> 83,8 MB )
 

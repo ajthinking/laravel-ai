@@ -1,12 +1,12 @@
 # laravel-ai
 <img src="data/laravel-terminator.png" height=256>
 
-This repository supplies tools to analyze the Laravel community's implementation practices for Artificial Inteligence research. That includes:
+This repository supplies tools to explore a set of github repositories as a dataset in a Artificial Inteligense model. The following components are provided
 
-* Github scrape module
-* Pytorch Dataset
-* Pytorch Dataloader
-* Example analysis
+* [x] Github scrape module
+* [ ] Pytorch Dataset
+* [ ] Pytorch Dataloader
+* [ ] Example analysis. As the name implies I will focus on applications built with the PHP framework Laravel.
 
 ## Installation
 * install anaconda
@@ -27,4 +27,4 @@ This repository supplies tools to analyze the Laravel community's implementation
 - [ ] Find online storage for harvested dumps (33K files -> 83,8 MB )
 
 ## License
-MIT and optionally [pay what you want](https://andersjurisoo.com/laravel-ai/pay-what-you-want) (Allows me to keep hosting the dataset on AWS).
+MIT

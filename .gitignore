@@ -9,4 +9,5 @@ src/__pycache__/
 data/*
 
 # exception to the rule
-!data/.gitkeep 
+!data/.gitkeep
+!data/laravel-terminator.png 

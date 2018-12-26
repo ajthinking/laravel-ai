@@ -63,6 +63,3 @@ class Transformer(object):
 if __name__ == '__main__':
     # Demo of the class 
     t = Transformer()
-    print(t.table())
-    print(t.columns())
-    print(t.names())

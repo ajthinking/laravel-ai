@@ -25,6 +25,7 @@ class GithubScraper(object):
         self.start_date = start_date
         self.interval_length = interval_length
         self.github = Github(env.GITHUB_ACCESS_TOKEN)
+        self.root = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../../")
         
     def scrape(self):
         print.info("Initializing scrape")
@@ -52,8 +53,7 @@ class GithubScraper(object):
             print.info(interval, "repo number", repo_number, repo.full_name, '**************************************************************************************')    
             print.group()
 
-            root = os.path.dirname(os.path.realpath(__file__))
-            repo_folder = os.path.join(root, "data/raw", repo.full_name)
+            repo_folder = os.path.join(self.root, "data/raw", repo.full_name)
             
             if os.path.isdir(repo_folder):
                 print.warning('Skipping already harvested repo', repo.full_name)
@@ -109,8 +109,7 @@ class GithubScraper(object):
 
     def save_file(self, repo, file):
         try:
-            root = os.path.dirname(os.path.realpath(__file__))
-            filename = os.path.join(root, "data/raw", repo.full_name, file)
+            filename = os.path.join(self.root, "data/raw", repo.full_name, file)
             os.makedirs(os.path.dirname(filename), exist_ok=True)
             with open(filename, "wb") as f:
                 f.write(

@@ -9,7 +9,6 @@ from github import Github
 from Print import Print
 from Env import env
 
-original_print = print
 print = Print() # add glorious indentation and colors to print
 
 class GithubScraper(object):

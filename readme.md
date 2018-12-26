@@ -1,5 +1,5 @@
 # laravel-ai
-<img src="images/laravel-terminator.png" height=256>
+<img src="data/laravel-terminator.png" height=256>
 
 This repository supplies tools to analyze the Laravel community's implementation practices for Artificial Inteligence research. That includes:
 

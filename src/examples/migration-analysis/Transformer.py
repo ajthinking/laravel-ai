@@ -6,8 +6,11 @@ import datetime
 import re
 from datetime import timedelta
 from github import Github
-from Print import Print
-from Env import env
+
+sys.path.append("/Users/anders/Code/github-scrape-laravel/src")
+from Print import Print #pylint: disable=E0401
+from Env import env #pylint: disable=E0401
+
 
 print = Print() # add glorious indentation and colors to print
 

@@ -1,7 +1,7 @@
 /scraped/
 /backup/
 *.pyc
-/Env.py
+src/Env.py
 /.vscode
 /__pycache__/
 

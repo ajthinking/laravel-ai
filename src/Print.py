@@ -29,6 +29,7 @@ class Print(object):
                 *args[1:],
                 self.ENDC
         )
+        self.active_color = self.ENDC
         return self
 
     def indentation(self):

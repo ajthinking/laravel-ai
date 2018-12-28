@@ -1,4 +1,4 @@
-name: learn-python-packages
+name: laravel-ai
 channels:
   - conda-forge
   - defaults

@@ -9,11 +9,15 @@ This repository supplies tools to explore a set of github repositories as a data
 * [ ] Example analysis. As the name implies I will focus on applications built with the PHP framework Laravel.
 
 ## Installation
-* install anaconda
-* install pygithub
-* install pytorch
-* copy Env.Example.py to Env.py and set your GITHUB_ACCESS_TOKEN
-* run ```python src/examples/migration-analysis/01_scrape.py```
+First, make sure you have anaconda installed. Then
+```
+git clone git@github.com:ajthinking/laravel-ai.git
+cd laravel-ai
+conda env create
+conda activate laravel-ai
+source activate
+python src/examples/migration-analysis/01_scrape.py
+```
 
 ## Todo
 - [x] Make a Env class

@@ -34,14 +34,6 @@ def transform(migration_files):
 
 rows = transform(files())
 
-for row in rows:
-    print(row)
-
-#14329 with all qualified #12197 when removed no table guys.
-
-
-
-# Disqualifyers (
-#   multiple tables,
-#   no create table statement)
-#   no migrations
+import json
+with open(os.path.join(Paths.processed,'data.json'), 'w') as outfile:
+    json.dump(rows, outfile, indent=4)

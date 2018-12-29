@@ -37,7 +37,7 @@ rows = transform(files())
 
 #sample
 with open(os.path.join(Paths.processed,'migration-analysis-data-sample.json'), 'w') as outfile:
-    json.dump(rows[10:], outfile, indent=4)
+    json.dump(rows[:10], outfile, indent=4)
 #full
 with open(os.path.join(Paths.processed,'migration-analysis-data.json'), 'w') as outfile:
     json.dump(rows, outfile)    

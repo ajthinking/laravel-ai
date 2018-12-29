@@ -28,8 +28,8 @@ def transform(migration_files):
                     migration_file.repo,
                     migration_file.name,
                     migration_file.table,
+                    column_name,
                     column_data_type,
-                    column_name
             ))
     return rows
 

@@ -4,6 +4,7 @@ from os import walk
 from glob import glob
 import numpy as np
 import re
+import json
 
 from MigrationFile import MigrationFile
 
@@ -34,6 +35,9 @@ def transform(migration_files):
 
 rows = transform(files())
 
-import json
-with open(os.path.join(Paths.processed,'data.json'), 'w') as outfile:
-    json.dump(rows, outfile, indent=4)
+#sample
+with open(os.path.join(Paths.processed,'migration-analysis-data-sample.json'), 'w') as outfile:
+    json.dump(rows[10:], outfile, indent=4)
+#full
+with open(os.path.join(Paths.processed,'migration-analysis-data.json'), 'w') as outfile:
+    json.dump(rows, outfile)    

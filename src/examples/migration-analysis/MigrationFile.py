@@ -78,7 +78,11 @@ class MigrationFile(object):
             return self.regex_for(
                     name.split("regex_for_",1)[1] 
             )
-        raise Exception('No such method')        
+        raise Exception('No such method') 
+
+    # todo
+    def tokenize(self):
+        pass
 
 if __name__ == '__main__':
     # Demo of the class 

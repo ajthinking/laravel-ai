@@ -11,6 +11,9 @@ from Print import Print #pylint: disable=E0401
 
 print = Print()
 
+import matplotlib.pyplot as plt; plt.rcdefaults()
+ 
+
 np.random.seed(1337)
 
 # See how high a random algoritm work for estimating the datatype
@@ -34,7 +37,20 @@ test = data[split_point:-1]
 train_datatypes = list(
     map(lambda item: item['datatype'], train)
 )
-train_unique_datatypes = np.unique(train_datatypes)
+train_unique_datatypes, train_unique_datatypes_count = np.unique(train_datatypes, return_counts=True)
+
+print.info("Lets look at the statistics of the training dataset")
+sort_index = np.argsort(-train_unique_datatypes_count)
+
+y_pos = np.arange(len(train_unique_datatypes))
+
+plt.bar(y_pos, train_unique_datatypes_count[sort_index], align='center', alpha=0.5)
+plt.xticks(y_pos, train_unique_datatypes[sort_index], rotation=90)
+plt.subplots_adjust(bottom=0.35)
+plt.ylabel('Usage')
+plt.title('Data type')
+ 
+plt.show()
 
 
 # How many matches if we select a random datatype?
@@ -50,14 +66,3 @@ correctGuessString = list(
 )
 print.info("Assuming string")
 print.success("{0:.0%}".format(len(correctGuessString)/len(test)), "matches")
-
-
-
-
-
-
-
-# ignored when doing random
-train_names = list(
-    map(lambda item: item['name'], train)
-)

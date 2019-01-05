@@ -33,9 +33,18 @@ class GithubScraper(object):
         for interval in self.make_time_intervals():
             self.scrape_interval(interval)
 
+    def search(self, interval):
+        try:
+            iterator = enumerate(self.github.search_repositories(query="Laravel created:" + interval, sort="stars"))
+        except:
+            print.warning("Going to sleep for 1 hour. The search API hit the limit")
+            time.sleep(3600)
+            iterator = self.search(interval)
+        return iterator
+
     def scrape_interval(self, interval):
         print.info("Scraping matches in timeframe", interval)
-        for repo_number, repo in enumerate(self.github.search_repositories(query="Laravel created:" + interval, sort="stars")):
+        for repo_number, repo in self.search(interval):
             print.reset()
             if repo_number >= self.max_repos:
                 print.warning("Max number of repos processed, bye bye")

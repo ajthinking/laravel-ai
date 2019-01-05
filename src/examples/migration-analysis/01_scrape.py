@@ -12,9 +12,7 @@ sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), "../..
 from Print import Print #pylint: disable=E0401
 from GithubScraper import GithubScraper #pylint: disable=E0401
 
-GithubScraper(
-        max_repos=3,
-        
+GithubScraper(        
         filters = [
                 "database/migrations",
                 "composer.json"
@@ -25,5 +23,5 @@ GithubScraper(
         
         # continue crashed executions
         start_date = datetime.datetime.strptime('20161105', r'%Y%m%d').date(),
-        #interval_length = 1
+        #interval_length = 10000
 ).scrape()

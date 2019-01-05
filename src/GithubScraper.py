@@ -24,7 +24,7 @@ class GithubScraper(object):
         self.filters = filters
         self.start_date = start_date
         self.interval_length = interval_length
-        self.github = Github(env.GITHUB_ACCESS_TOKEN)
+        self.github = Github(os.getenv("GITHUB_ACCESS_TOKEN"))
         self.root = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../../")
         
     def scrape(self):

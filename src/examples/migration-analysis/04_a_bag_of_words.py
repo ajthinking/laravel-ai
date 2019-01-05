@@ -11,6 +11,12 @@ import torch.utils.data as data
 import time
 import operator
 
+def tensor_to_string(tensor):
+    result = ''
+    for i, v in enumerate(tensor[0]):
+        result += str(round(1000*v.item())) + " "
+    return result
+
 class MigrationsDataset(data.Dataset):
     def __init__(self, train=False, test=False, transform=None, target_transform=None, download=False):
         data = []    
@@ -22,10 +28,11 @@ class MigrationsDataset(data.Dataset):
                 for index, col in enumerate(row):
                     my_obj[headers[index]] = col
                 data.append(my_obj)
-        np.random.seed(1337)
-        np.random.shuffle(data)
-        split_point1 = int(np.floor(len(data)*0.1))
-        split_point2 = int(np.floor(len(data)*0.11))
+            f.close() # Desperate bug hunt. The file should close after the end of the with open(...) block anyways
+        #np.random.seed(1337)
+        #np.random.shuffle(data)
+        split_point1 = int(np.floor(len(data)*0.9))
+        split_point2 = int(np.floor(len(data)*1.0))
         migrations_train = data[0:split_point1]
         migrations_test = data[split_point1:split_point2]
         #migrations_ditched = data[split_point2:]
@@ -55,20 +62,16 @@ class MigrationsDataset(data.Dataset):
         
         self.x = Variable(torch.tensor(tensor_input_data, dtype=torch.float))
         self.y = Variable(torch.tensor(tensor_output_data, dtype=torch.float))
-        if(train):
-            for y in self.y:
-                pass#print("Y...", self.output_tensor_to_text(y))
-
 
     def get_datatypes(self):
         return self.datatypes
 
     def output_tensor_to_text(self, output_tensor):
-        index, value = max(enumerate(output_tensor), key=operator.itemgetter(1))
+        index, value = max(enumerate(output_tensor[0]), key=operator.itemgetter(1))
         return self.datatypes[index]
 
     def input_tensor_to_text(self, input_tensor):
-        index, value = max(enumerate(input_tensor), key=operator.itemgetter(1))
+        index, value = max(enumerate(input_tensor[0]), key=operator.itemgetter(1))
         return self.global_word_bins[index]            
 
     def get_local_word_bins(self, migration):
@@ -127,11 +130,11 @@ network = Network()
 criterion = nn.MSELoss()
 # Stochasctic gradient descent
 
-optimizer = optim.SGD(network.parameters(), lr=0.01)
+optimizer = optim.SGD(network.parameters(), lr=1.0)
 
 # training loop
-for epoch in range(10):
-
+for epoch in range(100):
+    print("Training epoch", epoch)
     for i, data in enumerate(train_loader):
         # get the inputs
         inputs, output = data
@@ -142,17 +145,13 @@ for epoch in range(10):
         y_pred = network(inputs)
         # Compute and print loss
         loss = criterion(y_pred, output)
-        
-        #print(epoch, '\t', i, '\t', loss.item())
 
         # Zero gradients, perform a backward pass, and update the weights.
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
 
-print("\nTesting...\n")
-total_test_loss = 0
-
+print("\nTesting ------------------------------\n")
 successes = 0
 fails = 0
 
@@ -161,32 +160,32 @@ for i, data in enumerate(test_loader):
     inputs, output = data
     prediction = network(inputs).data 
     actual = output
+    inputs_index, inputs_value = max(enumerate(inputs), key=operator.itemgetter(1))
+    prediction_index, prediction_value = max(enumerate(actual), key=operator.itemgetter(1))
+    
 
     # print(
-    #     test_loader.dataset.input_tensor_to_text(inputs),
-    #     test_loader.dataset.output_tensor_to_text(actual)
+    #     inputs_index,
+    #     train_loader.dataset.input_tensor_to_text(inputs),
+    #     inputs,
+    #     prediction_index,
+    #     train_loader.dataset.output_tensor_to_text(actual),
+    #     actual
     # )
 
-    # print(
-    #         "prediction for",
-    #         test_loader.dataset.input_tensor_to_text(inputs),
-    #         ":", 
-    #         test_loader.dataset.output_tensor_to_text(prediction),
-    #         "actual",
-    #         test_loader.dataset.output_tensor_to_text(actual)
-    # )
+
+    print(
+            "prediction for",
+            test_loader.dataset.input_tensor_to_text(inputs),
+            ":", 
+            test_loader.dataset.output_tensor_to_text(prediction),
+            "actual",
+            test_loader.dataset.output_tensor_to_text(actual)
+    )
 
     if(test_loader.dataset.output_tensor_to_text(prediction) == test_loader.dataset.output_tensor_to_text(actual)):
         successes += 1
     else:
         fails += 1
-migrationsDataset = MigrationsDataset()
-length = len(migrationsDataset.global_word_bins)
-for l in range(24):
-    fake_data = np.zeros(length)
-    fake_data[l] = 1.0
-    torch.tensor(fake_data)
-    print(test_loader.dataset.output_tensor_to_text(torch.tensor(fake_data)))
-
 
 print("Summary successes", successes, "/", successes + fails)

@@ -2,6 +2,7 @@
 /backup/
 *.pyc
 src/Env.py
+**/.env
 /.vscode
 src/__pycache__/
 

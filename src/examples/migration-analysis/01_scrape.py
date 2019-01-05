@@ -1,6 +1,8 @@
 import datetime
 import sys
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # Add parent src hack 
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), "../../"))

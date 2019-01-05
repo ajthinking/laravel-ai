@@ -7,7 +7,6 @@ from datetime import timedelta
 
 from github import Github
 from Print import Print
-from Env import env
 
 print = Print() # add glorious indentation and colors to print
 

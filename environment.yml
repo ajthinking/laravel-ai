@@ -1,24 +1,41 @@
 name: laravel-ai
 channels:
+  - pytorch
   - conda-forge
   - defaults
 dependencies:
+  - appnope=0.1.0=py37_0
+  - beautifulsoup4=4.6.3=py37_0
   - ca-certificates=2018.11.29=ha4d7672_0
   - certifi=2018.11.29=py37_1000
   - cryptography=2.3.1=py37hdffb7b8_0
   - curl=7.63.0=h74213dd_0
+  - entrypoints=0.2.3=py37_2
+  - imageio=2.4.1=py37_0
+  - isort=4.3.4=py37_0
+  - jupyterlab=0.35.3=py37_0
   - krb5=1.16.2=hbb41f41_0
   - libcurl=7.63.0=hbdb9355_0
   - libssh2=1.8.0=h5b517e9_3
+  - nose=1.3.7=py37_2
   - openssl=1.0.2p=h470a237_1
+  - pexpect=4.6.0=py37_0
+  - ptyprocess=0.6.0=py37_0
   - pygithub=1.39=py37_1000
   - pyjwt=1.6.4=py_0
+  - pyopenssl=18.0.0=py37_0
   - python=3.7.1=h46c1a51_0
+  - python-dotenv=0.10.1=py_0
+  - setuptools=40.6.3=py37_0
+  - sympy=1.3=py37_0
+  - terminado=0.8.1=py37_1
+  - traitlets=4.3.2=py37_0
+  - wheel=0.32.3=py37_0
+  - xlwings=0.15.1=py37_0
   - alabaster=0.7.12=py37_0
   - anaconda-client=1.7.2=py37_0
   - anaconda=custom=py37_0
   - anaconda-project=0.8.2=py37_0
-  - appnope=0.1.0=py37_0
   - appscript=1.0.1=py37h1de35cc_1
   - asn1crypto=0.24.0=py37_0
   - astroid=2.1.0=py37_0
@@ -30,7 +47,6 @@ dependencies:
   - backports=1.0=py37_1
   - backports.os=0.1.1=py37_0
   - backports.shutil_get_terminal_size=1.0.0=py37_2
-  - beautifulsoup4=4.6.3=py37_0
   - bitarray=0.8.3=py37h1de35cc_0
   - bkcharts=0.2=py37_0
   - blas=1.0=mkl
@@ -59,7 +75,6 @@ dependencies:
   - defusedxml=0.5.0=py37_1
   - distributed=1.25.1=py37_0
   - docutils=0.14=py37_0
-  - entrypoints=0.2.3=py37_2
   - et_xmlfile=1.0.1=py37_0
   - expat=2.2.6=h0a44026_0
   - fastcache=1.0.2=py37h1de35cc_2
@@ -81,7 +96,6 @@ dependencies:
   - html5lib=1.0.1=py37_0
   - icu=58.2=h4b95b61_1
   - idna=2.8=py37_0
-  - imageio=2.4.1=py37_0
   - imagesize=1.1.0=py37_0
   - importlib_metadata=0.6=py37_0
   - intel-openmp=2019.1=144
@@ -89,7 +103,6 @@ dependencies:
   - ipython=7.2.0=py37h39e3cac_0
   - ipython_genutils=0.2.0=py37_0
   - ipywidgets=7.4.2=py37_0
-  - isort=4.3.4=py37_0
   - itsdangerous=1.1.0=py37_0
   - jbig=2.1=h4d881f8_0
   - jdcal=1.4=py37_0
@@ -101,7 +114,6 @@ dependencies:
   - jupyter_client=5.2.4=py37_0
   - jupyter_console=6.0.0=py37_0
   - jupyter_core=4.4.0=py37_0
-  - jupyterlab=0.35.3=py37_0
   - jupyterlab_server=0.2.0=py37_0
   - keyring=17.0.0=py37_0
   - kiwisolver=1.0.1=py37h0a44026_0
@@ -142,8 +154,8 @@ dependencies:
   - nbformat=4.4.0=py37_0
   - ncurses=6.1=h0a44026_1
   - networkx=2.2=py37_1
+  - ninja=1.8.2=py37h04f5b5a_1
   - nltk=3.4=py37_1
-  - nose=1.3.7=py37_2
   - notebook=5.7.4=py37_0
   - numba=0.41.0=py37h6440ff4_0
   - numexpr=2.6.8=py37h7413580_0
@@ -164,7 +176,6 @@ dependencies:
   - patsy=0.5.1=py37_0
   - pcre=8.42=h378b8a2_0
   - pep8=1.7.1=py37_0
-  - pexpect=4.6.0=py37_0
   - pickleshare=0.7.5=py37_0
   - pillow=5.3.0=py37hb68e598_0
   - pip=18.1=py37_0
@@ -174,7 +185,6 @@ dependencies:
   - prometheus_client=0.5.0=py37_0
   - prompt_toolkit=2.0.7=py37_0
   - psutil=5.4.8=py37h1de35cc_0
-  - ptyprocess=0.6.0=py37_0
   - py=1.7.0=py37_0
   - py-lief=0.9.0=py37hd4eaf27_0
   - pycodestyle=2.4.0=py37_0
@@ -186,7 +196,6 @@ dependencies:
   - pygments=2.3.1=py37_0
   - pylint=2.2.2=py37_0
   - pyodbc=4.0.25=py37h0a44026_0
-  - pyopenssl=18.0.0=py37_0
   - pyparsing=2.3.0=py37_0
   - pyqt=5.9.2=py37h655552a_2
   - pysocks=1.6.8=py37_0
@@ -217,7 +226,6 @@ dependencies:
   - scipy=1.1.0=py37h1410ff5_2
   - seaborn=0.9.0=py37_0
   - send2trash=1.5.0=py37_0
-  - setuptools=40.6.3=py37_0
   - simplegeneric=0.8.1=py37_2
   - singledispatch=3.4.0.3=py37_0
   - sip=4.19.8=py37h0a44026_0
@@ -234,28 +242,23 @@ dependencies:
   - sqlalchemy=1.2.15=py37h1de35cc_0
   - sqlite=3.26.0=ha441bb4_0
   - statsmodels=0.9.0=py37h1d22016_0
-  - sympy=1.3=py37_0
   - tblib=1.3.2=py37_0
-  - terminado=0.8.1=py37_1
   - testpath=0.4.2=py37_0
   - tk=8.6.8=ha441bb4_0
   - toolz=0.9.0=py37_0
   - tornado=5.1.1=py37h1de35cc_0
   - tqdm=4.28.1=py37h28b3542_0
-  - traitlets=4.3.2=py37_0
   - unicodecsv=0.14.1=py37_0
   - unixodbc=2.3.7=h1de35cc_0
   - urllib3=1.24.1=py37_0
   - wcwidth=0.1.7=py37_0
   - webencodings=0.5.1=py37_1
   - werkzeug=0.14.1=py37_0
-  - wheel=0.32.3=py37_0
   - widgetsnbextension=3.4.2=py37_0
   - wrapt=1.10.11=py37h1de35cc_2
   - wurlitzer=1.0.2=py37_0
   - xlrd=1.2.0=py37_0
   - xlsxwriter=1.1.2=py37_0
-  - xlwings=0.15.1=py37_0
   - xlwt=1.3.0=py37_0
   - xz=5.2.4=h1de35cc_4
   - yaml=0.1.7=hc338f04_2
@@ -263,10 +266,12 @@ dependencies:
   - zict=0.1.3=py37_0
   - zlib=1.2.11=h1de35cc_3
   - zstd=1.3.7=h5bba6e5_0
+  - pytorch=1.0.0=py3.7_1
   - pip:
     - libarchive-c==2.8
     - lief==0.9.0
     - msgpack==0.5.6
     - tables==3.4.4
-prefix: /Users/anders/anaconda3/envs/learn-python-packages
+    - torch==1.0.0
+prefix: /Users/anders/anaconda3/envs/laravel-ai
 

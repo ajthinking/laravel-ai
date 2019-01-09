@@ -24,7 +24,7 @@ class GithubScraper(object):
         self.start_date = start_date
         self.interval_length = interval_length
         self.github = Github(os.getenv("GITHUB_ACCESS_TOKEN"))
-        self.root = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../../")
+        self.root = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../")
         
     def scrape(self):
         print.info("Initializing scrape")
@@ -41,7 +41,7 @@ class GithubScraper(object):
                 return   # if we completed the yield from without an exception, we're done!
 
             except:  # you should probably limit this to catching a specific exception types
-                print.warning("Going to sleep for 1 hour. The search API hit the limit")
+                print.warning("Going to sleep for 1 hour. The search API hit the limit?", datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y"))
                 time.sleep(3600)
 
     def scrape_interval(self, interval):

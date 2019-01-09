@@ -17,11 +17,10 @@ GithubScraper(
                 "database/migrations",
                 "composer.json"
         ],
-
-        # Release date of Laravel 5
-        #start_date = datetime.datetime.strptime('20160823', r'%Y%m%d').date(),
         
-        # continue crashed executions 2017-03-13 it got to this data but there was no saved files...
-        start_date = datetime.datetime.strptime('20161105', r'%Y%m%d').date(),
+        # set this in your .env
+        start_date = datetime.datetime.strptime(os.getenv("START_SCRAPING_AT"), r'%Y%m%d').date(),
+        
+        # if you want to skip the intervals
         #interval_length = 10000
 ).scrape()

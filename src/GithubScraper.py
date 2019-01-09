@@ -34,13 +34,15 @@ class GithubScraper(object):
             self.scrape_interval(interval)
 
     def search(self, interval):
-        try:
-            iterator = enumerate(self.github.search_repositories(query="Laravel created:" + interval, sort="stars"))
-        except:
-            print.warning("Going to sleep for 1 hour. The search API hit the limit")
-            time.sleep(3600)
-            iterator = self.search(interval)
-        return iterator
+        while True:
+            try:
+                it = enumerate(self.github.search_repositories(query="Laravel created:" + interval, sort="stars"))
+                yield from it
+                return   # if we completed the yield from without an exception, we're done!
+
+            except:  # you should probably limit this to catching a specific exception types
+                print.warning("Going to sleep for 1 hour. The search API hit the limit")
+                time.sleep(3600)
 
     def scrape_interval(self, interval):
         print.info("Scraping matches in timeframe", interval)

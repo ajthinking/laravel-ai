@@ -43,7 +43,7 @@ class GithubScraper(object):
             except:  # you should probably limit this to catching a specific exception types
                 print.warning("Going to sleep for 1 hour. The search API hit the limit?", datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y"))
                 time.sleep(3600)
-                print.warning("Finished sleeping...")
+                print.warning("Finished sleeping what happens now ... (debug)")
 
 
     def scrape_interval(self, interval):

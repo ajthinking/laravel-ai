@@ -62,7 +62,7 @@ class GithubScraper(object):
                 # Then the rate will probably OK so we dont go back to sleep
                 self.github.get_rate_limit()
 
-            print.info(interval, "repo number", repo_number, repo.full_name, '**************************************************************************************')    
+            print.info(datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y"), interval, "repo number", repo_number, repo.full_name, '**************************************************************************************')    
             print.group()
 
             repo_folder = os.path.join(self.root, "data/raw", repo.full_name)

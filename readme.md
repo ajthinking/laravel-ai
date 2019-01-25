@@ -14,10 +14,8 @@ source activate
 python src/examples/migration-analysis/01_scrape.py
 ```
 
-## Todo
-- [ ] Deploy more scrapers
-- [ ] Transform 'data/raw' into 'data/processed/transformer-x'
-- [ ] Find online storage for harvested dumps (33K files -> 83,8 MB )
+## Disclaimer
+Please note to only use this repository in agreement with github API terms of service (scraping only ok for educational purposes).
 
 ## License
 MIT

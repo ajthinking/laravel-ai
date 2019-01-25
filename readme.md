@@ -1,15 +1,14 @@
-# laravel-ai
-<img src="data/laravel-terminator.png" height=256>
+# github-selective-scraper
 
-Scrape subsets of github repositories for use in a Artificial Intelligence models.
+Scrape subsets of github repositories
 
 ## Installation
 First, make sure you have anaconda installed. Then
 ```
-git clone git@github.com:ajthinking/laravel-ai.git
-cd laravel-ai
+git clone git@github.com:ajthinking/github-selective-scraper.git
+cd github-selective-scraper
 conda env create
-conda activate laravel-ai
+conda activate github-selective-scraper
 source activate
 python src/examples/migration-analysis/01_scrape.py
 ```
